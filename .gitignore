@@ -3,6 +3,7 @@
 
 # Macbook meta files
 .DS_store
+**/.DS_Store
 
 # IDEA files
 .idea
