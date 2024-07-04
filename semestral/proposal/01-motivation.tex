@@ -1,0 +1,71 @@
+\chapter{Motivation}\label{ch:motivation}
+
+The aim of the project is to create a C/C++ application designed as a distributed embedded DAQ (Data Acquisition)
+system that would simulate functionalities comparable to those found in a simple experimental rocket.
+Such a system would be able to monitor and process various environmental parameters, such as pressure or
+acceleration, and would on them provide real-time feedback to either itself or the operator.
+
+However, due to the complex nature, extensiveness and the limited scope of the project, the proposed design focuses on
+to be an exemplary model of the real-world application.
+As the primary goal is, to illustrate the capabilities, only the basic concepts as distributed
+telemetry acquisition and transfer will be explored.
+Also, the emphasis is given on builtin visualization for the verification of the correct functionality.
+
+To iterate, the main features of the proposed project are the data acquisition from various sources.
+Distributed retrieval and transfer of these sources across multiple processing units, and later visualization in a
+user-friendly manner, showcasing the system's ability to provide comprehensive real-time analysis of the surrounding
+environment.
+
+\section{Requirements}\label{sec:system-requirements}
+The proposed system fulfills the following minimal requirements:
+\begin{itemize}[leftmargin=*] % Remove the bullet
+    \item \textbf{Data Acquisition:} Telemetry collection from multiple peripheral devices.
+    \item \textbf{Distributed processing:} Multiple units connected to a single communication network.
+    \item \textbf{Data Visualization:} Graphical representation of the acquired data in real-time.
+\end{itemize}
+
+\newpage
+
+\section{Project scope}\label{sec:scope}
+The project core revolves around a main MCU (Microcontroller Unit) responsible for terminal data aggregation and
+visualization.
+Multiple secondary MCUs responsible for peripheral data acquisition, CAN (Controller Area Network) bus representing
+joint communication medium, underlying control software and final project documentation.
+
+The pivotal role plays the acquired telemetry, which illustrates various environmental parameters.
+However, close to none additional processing is done on the acquired data as the primary focus will be on the handling
+of the data throughout the system and not its utilization.
+For the purpose of this project, the following data representatives are considered:
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{Data} & \textbf{Description} & \textbf{Source} \\
+        \midrule
+        Pressure & Measured in Pa & BMP \\
+        Temperature & Measured in °C & BMP \\
+        \midrule
+        Acceleration & Measured in m/s\(^2\) in G & 9-DOF IMU \\
+        Rotation & Measured in degrees/s & 9-DOF IMU \\
+        Magnetic field & Measured in microteslas (\(\mu\)T) & 9-DOF IMU \\
+        \midrule
+        Digital Inputs & Binary state & GPIO \\
+        \bottomrule
+    \end{tabular}
+    \caption{Acquired telemetry data}
+    \label{tab:telemetry_data}
+\end{table}
+
+Terminal data aggregation is displayed to the end user/operator in a concise form.
+To correctly verify the system's functionality, the data should be visualized in a user-friendly manner.
+For this purpose, the main MCU has at its disposal multiple graphical peripherals.
+To name a few, an LCD (Liquid Crystal Display), 7-segment display, alphanumeric display and multiple LED
+(Light Emitting Diode) indicators are available.
+The built-in button and endpoint inputs also allow for the user to interact with the system and influence the
+final graphical output.
+
+Software-wise, the project is dived into \textit{layers}, \textit{modules} and \textit{libraries}.
+\textit{Layers} represent the separation of concerns, where each layer is responsible for a specific task or function.
+On the other hand, \textit{modules} represent the physical separation of the codebase for a specific MCU\@.
+\textit{Libraries} are shared among the modules and layers.
+They provide the necessary functionality and allow for control with the underlying hardware.

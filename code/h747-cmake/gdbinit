@@ -1,0 +1,10 @@
+# gdbinit
+target extended-remote :3333
+monitor reset halt
+monitor reset init
+set mem inaccessible-by-default off
+set remotetimeout 240
+file test.elf
+load
+break main
+continue
